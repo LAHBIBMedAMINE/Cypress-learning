@@ -1,0 +1,4 @@
+Cypress is asynchronous in nature (build on JavaScript)
+it will execute the steps whenever are ready so
+there is no guarantee in sequence of execution, but cypress takes care of it 
+but cypress takes care of executing it step by step

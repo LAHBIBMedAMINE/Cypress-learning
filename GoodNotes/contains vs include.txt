@@ -1,0 +1,2 @@
+// contains in cypress is an assertion
+// includes verify return boolean

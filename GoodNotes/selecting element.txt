@@ -1,0 +1,5 @@
+// To target only visibible Element
+Cy.get("element:visibible")
+
+//chain command
+Cy.get("element").find("element_inside")

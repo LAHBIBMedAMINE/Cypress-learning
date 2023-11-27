@@ -1,0 +1,33 @@
+cypress auto manage the popups
+
+// capture alert after firing it
+    it("popup",()=>{
+        cy.get("#alertbtn").click()
+        cy.on("window:alert",(str)=>{
+            expect(str).to.equal('Hello , share this practice page and share your knowledge')
+        })
+        
+        
+
+    })
+// capturing confir after firing it
+    it.only("alert&confirm",()=>{
+        cy.get("#confirmbtn").click()
+        cy.on("window:confirm",(str)=>{
+            expect(str).to.equal('Hello , Are you sure you want to confirm?')
+        })
+        
+
+    })
+	
+	
+	// cypress don't accept a new tab and to work around that it manipulate the DOM
+
+"removeAttr" is jquery commande that removes attribute
+"target" is attribute when is set to _blank will open the href in a new blank tab
+so we invoke the jquery comand to remove that attribute before clicking it
+
+it.only("childTabs",()=>{
+    cy.get("#opentab").invoke("removeAttr",'target').click()
+
+})

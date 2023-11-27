@@ -1,0 +1,8 @@
+cy.get('.brand').text() will not work because text() is not a cypress command
+and here the explanation
+if we chain a cypress command, cypress will resolve the promise and yield it to the next and will work
+but if we chained with a non cypress command we have to resolve 
+it manually by then() and after that we can execute the non cypress command 
+cy.get('.brand').then(function(constName){
+            cy.log(constName.text())
+        })

@@ -1,0 +1,19 @@
+// looping through element
+
+cy.get("div.products").find("div.product").find("h4.product-name")
+            .each(($el,index,$list)=>{
+              if($el.text().includes("Cashews")){
+                cy.get("div.products").find("div.product").eq(index)
+                    .find("button")
+                    .contains("ADD TO CART")
+                    .click()
+              }
+			  
+			  
+// similar to getText() in selnium 
+cy.get("div.products").find("div.product").find("h4.product-name").text()
+
+// $el is not an element interactable by cypress 
+$el.click() //// not working
+you need to 
+cy.wrap($el).click()
