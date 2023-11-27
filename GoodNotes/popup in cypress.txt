@@ -21,7 +21,7 @@ cypress auto manage the popups
     })
 	
 	
-	// cypress don't accept a new tab and to work around that it manipulate the DOM
+// cypress don't accept a new tab and to work around that it manipulate the DOM
 
 "removeAttr" is jquery commande that removes attribute
 "target" is attribute when is set to _blank will open the href in a new blank tab
@@ -29,5 +29,15 @@ so we invoke the jquery comand to remove that attribute before clicking it
 
 it.only("childTabs",()=>{
     cy.get("#opentab").invoke("removeAttr",'target').click()
+
+})
+
+or
+//2) navigate to link dirctly
+it.only("childTabs",()=>{
+    cy.get("#opentab").invoke("prop","href").then((urlstr)=>{
+        cy.visit(urlstr)
+    })
+
 
 })

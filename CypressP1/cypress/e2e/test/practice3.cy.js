@@ -26,11 +26,41 @@ describe('my first test', ()=> {
 
     })
 
-// switch tabs
-it.only("childTabs",()=>{
+
+    //table 
+
+it("manipulate tables",()=>{
+    cy.get("#product").find("tr").each(($row,index,$list)=>{
+        if($row.find("td").text().includes("Appium (Selenium) - Mobile Automation Testing from Scratch"))
+        {
+            cy.wrap($row.find("td")).eq(2).should("not.have.text","25")
+            cy.wrap($row.find("td")).eq(2).should("have.text","30")
+
+        }
+    })
+
+})
+
+//hover a mouse cypress don't support but use jquery
+it("hover over item",()=>{
+    cy.get("div.mouse-hover-content").invoke("show")
+    cy.contains("Top").click()
+})
+
+
+
+// no switch tabs we have to remove tartget or navigate to the url(not recommanded)
+//1)
+it("childTabs",()=>{
     cy.get("#opentab").invoke("removeAttr",'target').click()
-    // get back
-    cy.go('back')
+
+
+})
+it.only("childTabs",()=>{
+    cy.get("#opentab").invoke("prop","href").then((urlstr)=>{
+        cy.visit(urlstr)
+    })
+
 
 })
 

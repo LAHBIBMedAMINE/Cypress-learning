@@ -3,3 +3,12 @@ Cy.get("element:visibible")
 
 //chain command
 Cy.get("element").find("element_inside")
+
+//clicking on hided element
+//hover a mouse cypress don't support but use jquery to show the hidden element
+by invoking show to the element hidden (not the parent)
+it.only("hover over item",()=>{
+    cy.get("div.mouse-hover-content").invoke("show")
+    cy.contains("Top").click()
+})
+// we can use click({force:true}) to click on hidden element

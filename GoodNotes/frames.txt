@@ -1,0 +1,12 @@
+first download cypress-iframe
+termnal==> npm install cypress-iframe
+
+second you have to import it
+/// <reference types="cypress-iframe" />
+import 'cypress-iframe'
+
+it("handleFrames",()=>{
+         cy.frameLoaded("#courses-iframe")
+        cy.iframe().find("ul.navigation.clearfix li")
+
+    })
