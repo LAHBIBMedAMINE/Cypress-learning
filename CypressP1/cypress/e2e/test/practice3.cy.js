@@ -56,13 +56,14 @@ it("childTabs",()=>{
 
 
 })
+//2) navigate to link dirctly
 it.only("childTabs",()=>{
     cy.get("#opentab").invoke("prop","href").then((urlstr)=>{
         cy.visit(urlstr)
     })
-
-
 })
+
+
 
 
 

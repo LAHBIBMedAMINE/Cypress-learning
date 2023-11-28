@@ -10,7 +10,7 @@ describe('my first test', ()=> {
 
 
 
-    it('search for cashews',()=>{
+    it('search for cashews',function(){
         
         cy.get("input.search-keyword").type("ca")
         cy.get("button.search-button").click()

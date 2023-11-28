@@ -9,9 +9,6 @@ describe('my first test', ()=> {
     it("handleFrames",()=>{
         cy.frameLoaded("#courses-iframe")
         cy.iframe().find("ul.navigation.clearfix li")
-
-        
-
     })
 
 
