@@ -1,31 +1,21 @@
 /// <reference types="cypress" />
 
-
 describe('my first test', function() {
-    before(function(){
-        cy.visit("https://rahulshettyacademy.com/angularpractice/")
-        cy.fixture("example").then(function(data){
-            this.data=data
-            cy.log(data.name)
-        })
-        cy.fixture("productNames").then(function(productlist){
-            this.productlist=productlist
-            cy.log(productlist.products)
-        })
+    let data
+    let productlist
+    before(()=>{
+        
+        cy.visit(Cypress.env("url"))
+        cy.fixture('example').then((c) => {
+            data = c
+          })
+          cy.fixture('productNames').then((c) => {
+            productlist = c
+          })
 
     })
-
-    it("form",function(){
-        cy.get("input[name='name']:nth-child(2)").type(this.data.name)
-        cy.get('select').select(this.data.gender)
-        cy.get("input[name='name']:nth-child(1)").should("have.value",this.data.name)
-        cy.get("input[name='name']:nth-child(2)").should("have.attr",'minlength',2)
-        cy.get('#inlineRadio3').should("be.disabled")
-
-    })
-
     it("add_tocart",function(){
-        cy.visit("https://rahulshettyacademy.com/angularpractice/shop")
+        cy.visit(Cypress.env("url")+"/shop")
         cy.get("div.col-lg-9").find("div.card.h-100").each(($product,index,$list)=>{
             if($product.find("a").text().includes("Nokia")){
             cy.wrap($product.find("button.btn.btn-info")).click()
@@ -36,15 +26,35 @@ describe('my first test', function() {
         cy.search_and_addtocart("blee")
         cy.search_and_addtocart("Note")
 
-        this.productlist.products.forEach((element)=>{
+        productlist.products.forEach((element)=>{
+            cy.search_and_addtocart(element)
+        })
+    })
+
+    it("form",function(){
+        cy.visit(Cypress.env("url"))
+        cy.get("input[name='name']:nth-child(2)").type(data.name)
+        cy.get('select').select(data.gender)
+        cy.get("input[name='name']:nth-child(1)").should("have.value",data.name)
+        cy.get("input[name='name']:nth-child(2)").should("have.attr",'minlength',2)
+        cy.get('#inlineRadio3').should("be.disabled")
+
+    })
+
+    
+    it("add_tocart aproductlist",function(){
+        cy.visit(Cypress.env("url")+"/shop")
+
+        productlist.products.forEach((element)=>{
             cy.search_and_addtocart(element)
 
         })
     })
-    it.only("add_tocart aproductlist",function(){
-        cy.visit("https://rahulshettyacademy.com/angularpractice/shop")
 
-        this.productlist.products.forEach((element)=>{
+    it("add_tocartand checkout",function(){
+        cy.visit(Cypress.env("url")+"/shop")
+
+        productlist.products.forEach((element)=>{
             cy.search_and_addtocart(element)
 
         })
